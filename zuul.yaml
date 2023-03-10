@@ -1,0 +1,33 @@
+---
+- job:
+    name: otc-stackmon-status-dashboard-build-image
+    parent: otc-build-container-image
+    description: |
+      Build stackmon-status-dashboard container image customized for Open
+      Telekom Cloud
+    provides: otc-status-dashboard-container-image
+    vars: &status-dashboard_image_vars
+      docker_images:
+        - context: .
+          registry: quay.io
+          repository: opentelekomcloud/otc-status-dashboard
+          tags:
+            &imagetag "{{ zuul.tag is defined | ternary([zuul.get('tag', '').split('.')[0], '.'.join(zuul.get('tag', '').split('.')[:2]), zuul.get('tag', '')], ['latest']) }}"
+
+- job:
+    name: otc-stackmon-status-dashboard-upload-image
+    parent: otcinfra-upload-container-images
+    vars: *status-dashboard_image_vars
+
+- project:
+    merge-mode: squash-merge
+    default-branch: main
+    check:
+      jobs:
+        - otc-stackmon-status-dashboard-build-image
+    gate:
+      jobs:
+        - otc-stackmon-status-dashboard-upload-image
+    release:
+      jobs:
+        - otc-stackmon-status-dashboard-upload-image
