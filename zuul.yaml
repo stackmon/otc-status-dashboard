@@ -7,7 +7,7 @@
       Telekom Cloud
     provides: otc-status-dashboard-container-image
     vars: &status-dashboard_image_vars
-      docker_images:
+      container_images:
         - context: .
           registry: quay.io
           repository: opentelekomcloud/otc-status-dashboard
