@@ -1,0 +1,4 @@
+[submodule "status-dashboard"]
+	path = status-dashboard
+	url = https://github.com/stackmon/status-dashboard
+	branch = main

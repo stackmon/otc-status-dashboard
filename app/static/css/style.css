@@ -237,24 +237,24 @@ nav.navbar {
 }
 
 .sd-available::before {
-    content: "\f26b";
+    content: "\f26a";
     color: var(--dt-color-green-100);
 }
 .sd-outage::before {
-    content: "\f623";
-    color: var(--dt-color-red-100);
+    content: "\f622";
+    color: var(--dt-color-red-60);
 }
 .sd-major::before {
-    content: "\f623";
-    color: var(--dt-color-orange-100);
+    content: "\f622";
+    color: var(--dt-color-red-80);
 }
 .sd-minor::before {
-    content: "\f623";
+    content: "\f622";
     color: var(--dt-color-yellow-100);
 }
 .sd-maintenance::before {
-    content: "\f130";
-    color: var(--dt-color-blue);
+    content: "\f78e";
+    color: var(--dt-color-blue-70);
 }
 
 
