@@ -1,5 +1,5 @@
 # start by pulling the python image
-FROM quay.io/opentelekomcloud/stackmon-status-dashboard:change_23_latest
+FROM quay.io/opentelekomcloud/stackmon-status-dashboard:change_24_latest
 
 # copy the requirements file into the image
-COPY ./app /app/
+COPY ./app /app/app
