@@ -242,15 +242,15 @@ nav.navbar {
 }
 .sd-outage::before {
     content: "\f622";
-    color: var(--dt-color-red-60);
+    color: var(--dt-color-red-100);
 }
 .sd-major::before {
     content: "\f622";
-    color: var(--dt-color-red-80);
+    color: var(--dt-color-red-40);
 }
 .sd-minor::before {
     content: "\f622";
-    color: var(--dt-color-yellow-100);
+    color: var(--dt-color-orange-40);
 }
 .sd-maintenance::before {
     content: "\f78e";
@@ -263,14 +263,14 @@ nav.navbar {
     border: 2px solid var(--dt-color-red-50);
 }
 .alert-major {
-    border: 2px solid var(--dt-color-orange-80);
+    border: 2px solid var(--dt-color-red-40);
 }
 .alert-minor {
-    border: 2px solid var(--dt-color-yellow-80);
+    border: 2px solid var(--dt-color-orange-40);
 }
 .alert-maintenance {
     /*background-color: var(--dt-color-blue-30);*/
-    border: 2px solid var(--dt-color-blue-80);
+    border: 2px solid var(--dt-color-blue-70);
 }
 
 .bi {
