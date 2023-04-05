@@ -246,11 +246,11 @@ nav.navbar {
 }
 .sd-major::before {
     content: "\f622";
-    color: var(--dt-color-red-80);
+    color: var(--dt-color-orange-100);
 }
 .sd-minor::before {
     content: "\f622";
-    color: var(--dt-color-yellow-100);
+    color: var(--dt-color-orange-60);
 }
 .sd-maintenance::before {
     content: "\f78e";
@@ -263,18 +263,22 @@ nav.navbar {
     border: 2px solid var(--dt-color-red-50);
 }
 .alert-major {
-    border: 2px solid var(--dt-color-orange-80);
+    border: 2px solid var(--dt-color-orange-100);
 }
 .alert-minor {
-    border: 2px solid var(--dt-color-yellow-80);
+    border: 2px solid var(--dt-color-orange-60);
 }
 .alert-maintenance {
-    /*background-color: var(--dt-color-blue-30);*/
     border: 2px solid var(--dt-color-blue-80);
 }
 
 .bi {
     font-size: 1rem;
+}
+
+/* Navbar */
+nav.navbar .navbar-nav > a {
+    color: var(--dt-color-white);
 }
 
 
