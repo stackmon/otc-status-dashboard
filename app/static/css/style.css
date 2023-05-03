@@ -217,6 +217,8 @@ nav.navbar {
     width: 100%,
     max-width: 300px;
     height: 38px;
+    /* margin to top same size as skippy height */
+    margin-top: 4px;
 }
 
 .header-title {
