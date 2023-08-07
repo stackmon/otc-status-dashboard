@@ -305,8 +305,42 @@ nav.navbar {
   justify-content: center;
 }
 
+.table-header {
+  top:4;
+  background-color: var(--dt-color-magenta);
+  color: var(--dt-color-white);
+}
+
+.table thead > tr > th {
+  border: none;
+}
+
+.table thead > tr {
+  border: none;
+}
+
+tbody:nth-child(odd) {
+  background: var(--dt-color-grey-10) !important;
+}
+
+.bg-0 {
+  background-color: var(--dt-color-green-10) !important;
+}
+
+.bg-1 {
+  background-color: var(--dt-color-orange-10) !important;
+}
+
+.bg-2 {
+  background-color: var(--dt-color-red-10) !important;
+}
+
 /* Navbar */
 nav.navbar .navbar-nav > a {
+    color: var(--dt-color-white);
+}
+
+nav.navbar .navbar-nav > div > a {
     color: var(--dt-color-white);
 }
 
