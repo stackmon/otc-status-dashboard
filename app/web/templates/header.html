@@ -13,6 +13,11 @@
             <div class="dropdown-menu dropdown-menu-end">
                     <a class="dropdown-item" href="{{ url_for('web.history') }}">Incident History</a>
                     <a class="dropdown-item" href="{{ url_for('web.sla') }}">Component Availability</a>
+                    <a class="dropdown-item"
+                      href="https://docs.otc.t-systems.com/additional/sd-manual.html"
+                      target="_blank">
+                      User Manual
+                    </a>
             </div>
           </div>
 {% if 'user' in session %}
