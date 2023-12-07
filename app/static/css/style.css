@@ -264,6 +264,24 @@ nav.navbar {
     content: "\f78e";
     color: var(--dt-color-blue-70);
 }
+.bi-circle::before {
+    content: "\f287";
+    color: var(--dt-color-white);
+    font-size: 0.7rem;
+    position: absolute;
+    bottom: 7px;
+    right: 12px;
+    text-align: right;
+}
+.sd-planned-maintenance::before {
+    content: "\f78e";
+    color: var(--dt-color-blue-70);
+    font-size: 0.7rem;
+    position: absolute;
+    bottom: 7px;
+    right: 12px;
+    text-align: right;
+}
 
 
 .alert-outage {
