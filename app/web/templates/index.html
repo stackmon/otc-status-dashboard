@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>OTC Status Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="h-100 mt-4 mb-4 open-telekom-cloud">
+    <b><span class="b mr-2 d-inline-block">OPEN TELEKOM CLOUD</span>
+    <span class="d-inline-block">STATUS DASHBOARD</span></b>
+</div>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class=container>
+    {% for message in messages %}
+      <div class="alert alert-danger" role="alert">
+      {{ message }}
+      </div>
+    {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="container">
+  {% set open_incidents = incidents.get_all_active() %}
+  {% if open_incidents | length == 0 %}
+    <div class="alert alert-success" role="alert">
+      All systems running
+    </div>
+  {% else %}
+    {% for incident in open_incidents | sort(attribute='start_date', reverse = True) %}
+      {% set impact = config['INCIDENT_IMPACTS'][incident.impact] %}
+        <div class="alert alert-{{impact.key}}" role="alert">
+          <h4 class="alert-heading">
+              <a class="alert-link"
+                  href="incidents/{{incident.id}}"> {{ incident.text }}</a>
+        </h4>
+	<h6>Impact: {{ impact.string }}</h6>
+        <h6>Affected Region(s): {{
+            incident.get_attributes_by_key('region')
+            | join(', ')
+            }}</h6>
+        <h6>Affected Service(s):
+            {% set comma = joiner(",") %}
+            {% for comp in incident.components %}
+            {% with attrs = comp.get_attributes_as_dict() %}
+              {{ comma() }} {{ comp.name }} ({{attrs['region']}})
+            {% endwith %}
+            {% endfor %}
+        </h6>
+        <small class="text-secondary">Started: {{ incident.start_date.strftime('%Y-%m-%dT%H:%M') }}</small>
+        <hr/>
+        {% if incident.updates | length != 0 %}
+          <div class="container text-left">
+          {% set update = incident.updates[0] %}
+            <div class="row">
+                <div class="col-md-2">
+                    <h6>{{ update.status }}</h6>
+                    <small class="text-secondary">Posted {{ update.timestamp.strftime('%Y-%m-%d %H:%M') }}</small>
+                </div>
+                <div class="col-md-10">
+                    {{ update.text }}
+                </div>
+                <hr/>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+     {% endfor %}
+  {% endif %}
+
+<div class="container">
+  {% set regions = component_attributes.get_unique_values('region') %}
+  {% set all_components_with_incidents = components.all_with_active_incidents() %}
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+    {% for region in regions %}
+      <li class="nav-item" role="presentation">
+          {% if loop.first %}
+          <button class="nav-link active"
+          {% else %}
+          <button class="nav-link"
+          {% endif %}
+                  id="{{ region }}-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#{{ region }}"
+                  type="button"
+                  role="tab"
+                  aria-controls="{{region}}"
+                  {% if loop.first %}
+                  aria-selected="true"
+                  {% else %}
+                  aria-selected="false"
+                  {% endif %}
+                  >
+              {{ region | upper }}</button>
+      </li>
+    {% endfor %}
+  </ul>
+ <!-- Tab panes -->
+ <div class="tab-content mt-3">
+   {% for region in regions %}
+     {% if loop.first %}
+       <div class="tab-pane fade show active"
+     {% else %}
+       <div class="tab-pane fade"
+     {% endif %}
+          id="{{region}}"
+          tabindex="0"
+          role="tabpanel"
+          aria-labelledby="{{region}}-tab"
+          >
+          {% include 'region_card.html' %}
+       </div>
+   {% endfor %}
+ </div>
+</div>
+
+<div>
+  <div class="container mt-4">
+    <ul class="list-group list-group-horizontal list-group-flush">
+      <li class="list-group-item">
+          <i class="bi sd-available me-1"></i>Operational</li></li>
+      <li class="list-group-item">
+          <i class="bi sd-maintenance me-1"></i>Maintenance</li>
+      <li class="list-group-item">
+          <i class="bi sd-minor me-1"></i><span>Minor Issue</span></li>
+      <li class="list-group-item">
+          <i class="bi sd-major me-1"></i><span>Major Issue</span></li>
+      <li class="list-group-item">
+          <i class="bi sd-outage me-1"></i><span>Outage</span></li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}
+
+{% macro component_status_widget(incidents) -%}
+    {% if not incidents %}
+      <i class="bi sd-available"></i>
+    {% else %}
+    {% set incident=incidents[0] %}
+      <a href="/incidents/{{ incident.id }}" title="Open Incident">
+        <i class="bi sd-{{ config['INCIDENT_IMPACTS'][incident.impact].key }}"></i>
+      </a>
+      {% endif %}
+{% endmacro -%}
