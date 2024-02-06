@@ -359,6 +359,10 @@ tbody:nth-child(odd) {
   background-color: var(--dt-color-red-10) !important;
 }
 
+.indent {
+  margin-left: 30px;
+}
+
 /* Navbar */
 nav.navbar .navbar-nav > a {
     color: var(--dt-color-white);
