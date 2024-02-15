@@ -363,6 +363,10 @@ tbody:nth-child(odd) {
   margin-left: 30px;
 }
 
+.counter-red {
+  color: var(--dt-color-red-60);
+}
+
 /* Navbar */
 nav.navbar .navbar-nav > a {
     color: var(--dt-color-white);
