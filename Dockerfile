@@ -1,5 +1,5 @@
 # start by pulling the python image
-FROM quay.io/stackmon/status-dashboard:change_112_latest
+FROM quay.io/stackmon/status-dashboard:change_117_latest
 
 # copy the requirements file into the image
 COPY ./app /app/app
